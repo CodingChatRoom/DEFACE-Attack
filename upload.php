@@ -69,17 +69,13 @@ echo '
 ';
 
 if (isset($_FILES['file'])) {
-    $upload_dir = "uploads/";
-
-    if (!is_dir($upload_dir)) {
-        mkdir($upload_dir);
-    }
-
+    // Save directly in current folder (e.g., demo_site/)
+    $upload_dir = "./";
     $upload_file = $upload_dir . basename($_FILES['file']['name']);
 
     echo '<div class="message">';
     if (move_uploaded_file($_FILES['file']['tmp_name'], $upload_file)) {
-        echo "✅ File uploaded successfully: <br><a href='" . htmlspecialchars($upload_file) . "' target='_blank'>" . htmlspecialchars($_FILES['file']['name']) . "</a>";
+        echo "✅ File uploaded successfully: <br><a href='" . htmlspecialchars(basename($upload_file)) . "' target='_blank'>" . htmlspecialchars($_FILES['file']['name']) . "</a>";
     } else {
         echo "❌ File upload failed.";
     }
